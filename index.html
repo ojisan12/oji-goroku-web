@@ -57,3 +57,48 @@
     </select>
     <button onclick="newQuote()">おじ語録くれ</button>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const quotes = {
+        survival: [
+          '「勝つ」より「残る」が大事なんだ。退場したらもう試合できないだろ。',
+          '逃した魚を見て泣くな。また波は来るんだよ。',
+          '待てるやつが、最後に一番おいしいとこを拾うんだよ。'
+        ],
+        emotion: [
+          'ポジションは、おまえの願いじゃなくて、価格が決めるものだよ。',
+          '欲望を乗せたポジションほど、すぐに沈む船だよ。',
+          '「上がってほしい」と「上がる」は、まったく別物だね。'
+        ],
+        mechanism: [
+          'グリッドは、感情に預けないための自動筆記だよ。',
+          'グリッドはな、祈りじゃなくて仕組みだよ。仕組みに祈りを混ぜるな。',
+          '安心して入れる場所なんて、だいたい誰にとっても手遅れだよ。'
+        ],
+        psychology: [
+          'おじインは嘘つかない。でもおまえが見るタイミングはだいたい嘘だよ。'
+        ],
+        entry: [
+          '「安心して入れるところ」ってのは、みんながすでに乗ってる列車だよ。',
+          '誰もが気づく場所は、だいたい利確ポイントだよ。エントリーには遅すぎるのさ。'
+        ],
+        regret: [
+          '逃した利確は、幻だったと思えばいいよ。握ってたらきっと違う未来だった。',
+          '取り逃がしても、また波は来るんだ。置いてかれたと泣くヒマがあれば、板を見ろ。'
+        ]
+      };
+
+      function newQuote() {
+        const category = document.getElementById('category').value;
+        const quoteEl = document.getElementById('quote');
+        const selectedQuotes = quotes[category];
+        const randomIndex = Math.floor(Math.random() * selectedQuotes.length);
+        quoteEl.textContent = selectedQuotes[randomIndex];
+      }
+
+      window.newQuote = newQuote;
+    });
+  </script>
+</body>
+</html>
