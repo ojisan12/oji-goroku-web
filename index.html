@@ -55,7 +55,7 @@
       <option value="entry">エントリーの誤解</option>
       <option value="regret">取り逃がしと後悔</option>
     </select>
-    <button onclick="newQuote()">おじ語録くれ</button>
+    <button id="generateBtn">おじ語録くれ</button>
   </div>
 
   <script>
@@ -89,15 +89,16 @@
         ]
       };
 
-      function newQuote() {
-        const category = document.getElementById('category').value;
-        const quoteEl = document.getElementById('quote');
+      const button = document.getElementById('generateBtn');
+      const quoteEl = document.getElementById('quote');
+      const categorySelect = document.getElementById('category');
+
+      button.addEventListener('click', () => {
+        const category = categorySelect.value;
         const selectedQuotes = quotes[category];
         const randomIndex = Math.floor(Math.random() * selectedQuotes.length);
         quoteEl.textContent = selectedQuotes[randomIndex];
-      }
-
-      window.newQuote = newQuote;
+      });
     });
   </script>
 </body>
