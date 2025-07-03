@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>おじことば製造機 v1.1</title>
+  <style>
+    body {
+      font-family: 'YuGothic', sans-serif;
+      background-color: #fefae0;
+      color: #333;
+      text-align: center;
+      padding: 50px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
+    select, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #6c584c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .quote {
+      margin-top: 30px;
+      font-size: 22px;
+      font-weight: bold;
+      background: #fff3cd;
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>おじことば製造機 v1.1 ☕️</h1>
+    <p>テーマと口調を選んで、心に刺さる皮肉をどうぞ。</p>
+
+    <label>テーマ：</label>
+    <select id="themeSelect">
+      <option value="">-- 全部 --</option>
+      <option value="エントリー衝動">エントリー衝動</option>
+      <option value="利確">利確</option>
+      <option value="含み損">含み損</option>
+      <option value="損切り">損切り</option>
+      <option value="自信過剰">自信過剰</option>
+      <option value="逆張り">逆張り</option>
+      <option value="退場">退場</option>
+      <option value="トレードの本質">トレードの本質</option>
+      <option value="連敗中">連敗中</option>
+      <option value="SNS自慢">SNS自慢</option>
+    </select>
+
+    <label>皮肉度：</label>
+    <select id="toneSelect">
+      <option value="">-- 全部 --</option>
+      <option value="やや皮肉">やや皮肉</option>
+      <option value="ガチ皮肉">ガチ皮肉</option>
+      <option value="哲学風">哲学風</option>
+      <option value="軽皮肉">軽皮肉</option>
+      <option value="愚痴風">愚痴風</option>
+      <option value="講義風">講義風</option>
+    </select>
+
+    <br>
+    <button onclick="generateQuote()">おじことばを出す</button>
+    <div class="quote" id="quoteDisplay"></div>
+  </div>
+
+  <script>
+    const quotes = [
+      {{
+        theme: "利確",
+        tone: "軽皮肉",
+        format: "名言一行",
+        quote: "利確ってのは、納得して傷を浅くする作業だ。"
+      }},
+      {{
+        theme: "損切り",
+        tone: "哲学風",
+        format: "名言一行",
+        quote: "生き延びる者は、痛みを受け入れた者だけだ。"
+      }},
+      {{
+        theme: "連敗中",
+        tone: "愚痴風",
+        format: "名言一行",
+        quote: "勝てない時ほど、チャートが優しく見える。不思議だな。"
+      }},
+      {{
+        theme: "エントリー衝動",
+        tone: "やや皮肉",
+        format: "名言一行",
+        quote: "お前の指、エントリー依存症か？"
+      }},
+      {{
+        theme: "逆張り",
+        tone: "ガチ皮肉",
+        format: "名言一行",
+        quote: "群れから外れるのが“逆張り”じゃない。死にに行くのが“逆走”だ。"
+      }},
+      {{
+        theme: "退場",
+        tone: "講義風",
+        format: "三段構成",
+        quote: "資金が尽きるのは、運が悪いからじゃない。／続け方を知らないだけだ。／退場は戦略ミスの結果だ。"
+      }},
+      {{
+        theme: "含み損",
+        tone: "哲学風",
+        format: "名言一行",
+        quote: "評価損は、心の鏡だ。逃げても消えない。"
+      }},
+      {{
+        theme: "自信過剰",
+        tone: "軽皮肉",
+        format: "名言一行",
+        quote: "3連勝した？なら、そろそろ墓穴の用意だな。"
+      }},
+      {{
+        theme: "SNS自慢",
+        tone: "ガチ皮肉",
+        format: "名言一行",
+        quote: "利益を晒す前に、損失の墓を掃除しとけ。"
+      }},
+      {{
+        theme: "トレードの本質",
+        tone: "哲学風",
+        format: "名言一行",
+        quote: "トレードとは、確率と感情の戦争である。勝つのは、いつも無感情な方だ。"
+      }}
+    ];
+
+    function generateQuote() {
+      const selectedTheme = document.getElementById("themeSelect").value;
+      const selectedTone = document.getElementById("toneSelect").value;
+
+      const filtered = quotes.filter(q =>
+        (selectedTheme === "" || q.theme === selectedTheme) &&
+        (selectedTone === "" || q.tone === selectedTone)
+      );
+
+      const display = document.getElementById("quoteDisplay");
+
+      if (filtered.length === 0) {
+        display.innerText = "該当するおじことばが見つかりません。";
+      } else {
+        const randomIndex = Math.floor(Math.random() * filtered.length);
+        display.innerText = "『" + filtered[randomIndex].quote + "』";
+      }
+    }
+  </script>
+</body>
+</html>
